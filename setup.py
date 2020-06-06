@@ -7,7 +7,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 
 setup(name='imagecast',
       version='0.1.0',
-      description='Imagecast modifies images, optionally serving them via HTTP API',
+      description='Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API.',
       long_description=README,
       license="AGPL 3, EUPL 1.2",
       classifiers=[

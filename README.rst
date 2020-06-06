@@ -19,9 +19,16 @@ Imagecast
 *****
 About
 *****
-Imagecast modifies images, optionally serving them via HTTP API.
+Imagecast is like ImageMagick but for Pythonistas.
+Optionally provides its features via HTTP API.
+
+Currently, this is based on Pillow_. However, it
+might be based on Wand_ in the future.
 
 There might still be dragons.
+
+.. _Pillow: https://pillow.readthedocs.io/
+.. _Wand: http://wand-py.org/
 
 
 *******
