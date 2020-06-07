@@ -3,7 +3,14 @@
 # License: GNU Affero General Public License, Version 3
 import io
 import requests
+import ttl_cache
 from PIL import Image
+
+
+@ttl_cache(15)
+def fetch_cached(uri):
+    response = requests.get(uri)
+    return response.content
 
 
 class ImageEngine:
@@ -12,9 +19,8 @@ class ImageEngine:
         self.data = None
         self.image = None
 
-    def download(self, url):
-        response = requests.get(url)
-        self.data = response.content
+    def download(self, uri):
+        self.data = fetch_cached(uri)
 
     def read(self):
         self.image = Image.open(io.BytesIO(self.data))
@@ -62,3 +68,27 @@ class ImageEngine:
         buffer = io.BytesIO()
         self.image.save(buffer, format=format, dpi=(dpi, dpi))
         return buffer.getvalue()
+
+
+def process(options):
+    ie = ImageEngine()
+    ie.download(options.uri)
+    ie.read()
+
+    if options.monochrome:
+        ie.monochrome(int(options.monochrome))
+
+    if options.grayscale:
+        ie.grayscale()
+
+    # (left, top, right, bottom)
+    if options.crop:
+        cropbox = map(int, options.crop.split(','))
+        ie.crop(cropbox)
+
+    if options.width:
+        ie.resize_width(int(options.width))
+    if options.height:
+        ie.resize_height(int(options.height))
+
+    return ie

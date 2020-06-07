@@ -3,11 +3,11 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.rst')).read()
+README = open(os.path.join(here, "README.rst")).read()
 
-setup(name='imagecast',
-      version='0.1.1',
-      description='Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API.',
+setup(name="imagecast",
+      version="0.1.1",
+      description="Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API.",
       long_description=README,
       license="AGPL 3, EUPL 1.2",
       classifiers=[
@@ -38,30 +38,31 @@ setup(name='imagecast',
         "Operating System :: Unix",
         "Operating System :: MacOS"
         ],
-      author='Andreas Motl',
-      author_email='andreas.motl@panodata.org',
-      url='https://github.com/panodata/imagecast',
-      keywords='image conversion http api proxy',
+      author="Andreas Motl",
+      author_email="andreas.motl@panodata.org",
+      url="https://github.com/panodata/imagecast",
+      keywords="image conversion http api proxy",
       packages=find_packages(),
       include_package_data=True,
       package_data={
       },
       zip_safe=False,
       install_requires=[
-          'docopt==0.6.2',
-          'munch==2.3.2',
-          'Pillow==7.1.2',
-          'requests==2.23.0',
+          "docopt==0.6.2",
+          "munch==2.3.2",
+          "Pillow==7.1.2",
+          "requests==2.23.0",
+          "ttl-cache==1.6",
       ],
       extras_require={
-          'service': [
-              'fastapi==0.55.1',
-              'uvicorn==0.11.5',
+          "service": [
+              "fastapi==0.55.1",
+              "uvicorn==0.11.5",
           ],
       },
       entry_points={
-          'console_scripts': [
-              'imagecast = imagecast.cli:run',
+          "console_scripts": [
+              "imagecast = imagecast.cli:run",
           ],
       },
 )

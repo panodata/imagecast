@@ -50,9 +50,9 @@ With service API::
 Features
 ********
 - Colorspace conversion: monochrome, grayscale
-- Cropping with negative right/bottom padding
+- Cropping with negative right/bottom offsets
 - Resizing while keeping aspect ratio
-- Output format: Any image formats or bytes
+- Output format: Any image formats from Pillow or raw bytes
 - HTTP API
 
 
@@ -85,3 +85,20 @@ Start the Imagecast service as daemon::
 Example::
 
     /?uri=https%3A%2F%2Funsplash.com%2Fphotos%2FWvdKljW55rM%2Fdownload%3Fforce%3Dtrue&monochrome=80&crop=850,1925,-950,-900&width=640
+
+.. note::
+
+    You should not run the service without restricting the
+    list of allowed remote hosts on the public internet.
+
+    To do that, invoke the service like::
+
+        imagecast service --allowed-hosts=unsplash.com,media.example.org
+
+
+**************
+Other projects
+**************
+- https://github.com/DictGet/ecce-homo
+- https://github.com/agschwender/pilbox
+- https://github.com/francescortiz/image
