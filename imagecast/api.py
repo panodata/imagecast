@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 # (c) 2020 Andreas Motl <andreas@terkin.org>
 # License: GNU Affero General Public License, Version 3
-import io
 import logging
-from dataclasses import dataclass
 from typing import List
+from dataclasses import dataclass
 
 from PIL import Image
 from fastapi import FastAPI, Query, Depends, HTTPException
-from fastapi.responses import HTMLResponse, PlainTextResponse
-from httptools.parser.parser import parse_url
+from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 from pydantic import BaseSettings
-from starlette.responses import StreamingResponse
 from starlette.status import HTTP_403_FORBIDDEN
+from httptools.parser.parser import parse_url
 
 from imagecast import __appname__, __version__
 from imagecast.core import process
@@ -56,18 +54,23 @@ def index(options: QueryOptions = Depends(QueryOptions)):
         if '*' not in settings.allowed_hosts and remote_host not in settings.allowed_hosts:
             raise HTTPException(status_code=HTTP_403_FORBIDDEN)
 
+        # Mogrify image.
         ie = process(options)
 
+        # Determine output format.
         options.format = options.format or ie.image.format
-
         if options.format == 'bytes':
             buffer = ie.to_bytes()
         else:
             buffer = ie.to_buffer(options.format, options.dpi)
 
-        mime_type = Image.MIME.get(options.format)
+        # Determine content type.
+        mime_type = Image.MIME.get(options.format.upper())
+        if mime_type is None:
+            mime_type = 'application/octet-stream'
 
-        return StreamingResponse(io.BytesIO(buffer), media_type=mime_type)
+        return Response(buffer, media_type=mime_type)
+
     else:
         return HTMLResponse(f"""
         <html>
