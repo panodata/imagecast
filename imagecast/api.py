@@ -39,6 +39,7 @@ class QueryOptions:
     height: int = Query(default=None)
     dpi: int = Query(default=72)
     format: str = Query(default=None)
+    cache_ttl: int = Query(default=300)
 
 
 @app.get("/")

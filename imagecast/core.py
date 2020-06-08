@@ -2,25 +2,25 @@
 # (c) 2020 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import io
-import requests
-import ttl_cache
 from PIL import Image
-
-
-@ttl_cache(15)
-def fetch_cached(uri):
-    response = requests.get(uri)
-    return response.content
+from requests_cache import CachedSession
 
 
 class ImageEngine:
 
-    def __init__(self):
+    http = None
+
+    def __init__(self, cache_ttl=300):
         self.data = None
         self.image = None
 
+        # Setup HTTP client cache
+        if ImageEngine.http is None:
+            ImageEngine.http = CachedSession(backend="memory", expire_after=cache_ttl)
+
     def download(self, uri):
-        self.data = fetch_cached(uri)
+        response = self.http.get(uri)
+        self.data = response.content
 
     def read(self):
         self.image = Image.open(io.BytesIO(self.data))
@@ -71,7 +71,7 @@ class ImageEngine:
 
 
 def process(options):
-    ie = ImageEngine()
+    ie = ImageEngine(cache_ttl=options.cache_ttl)
     ie.download(options.uri)
     ie.read()
 

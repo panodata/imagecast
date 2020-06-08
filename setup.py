@@ -52,7 +52,7 @@ setup(name="imagecast",
           "munch==2.3.2",
           "Pillow==7.1.2",
           "requests==2.23.0",
-          "ttl-cache==1.6",
+          "requests-cache>=0.5,<0.6",
       ],
       extras_require={
           "service": [

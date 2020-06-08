@@ -5,7 +5,12 @@ Imagecast changelog
 
 in progress
 ===========
+
+
+2020-06-08 0.3.0
+================
 - Use static response instead of streaming response aka. ``Transfer-Encoding: chunked``
+- Improve HTTP caching
 
 
 2020-06-08 0.2.0

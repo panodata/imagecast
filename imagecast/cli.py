@@ -78,6 +78,9 @@ def run():
     if not (options.display or options.save or options.format):
         raise KeyError('Please specify one of "--display", "--save" or "--format"')
 
+    # TTL not used on CLI operations.
+    options.cache_ttl = 300
+
     ie = process(options)
 
     dpi = int(options.dpi)
