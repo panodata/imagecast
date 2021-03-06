@@ -6,6 +6,7 @@ Imagecast changelog
 in progress
 ===========
 - Add explicit ``--reload`` option to ``imagecast service`` for development mode
+- Get rid of the "httptools" dependency
 
 
 2020-06-08 0.3.0

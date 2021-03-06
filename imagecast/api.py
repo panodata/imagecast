@@ -4,13 +4,13 @@
 import logging
 from typing import List
 from dataclasses import dataclass
+from urllib.parse import urlparse
 
 from PIL import Image
 from fastapi import FastAPI, Query, Depends, HTTPException
 from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 from pydantic import BaseSettings
 from starlette.status import HTTP_403_FORBIDDEN
-from httptools.parser.parser import parse_url
 
 from imagecast import __appname__, __version__
 from imagecast.core import process
@@ -50,8 +50,8 @@ def index(options: QueryOptions = Depends(QueryOptions)):
     if options.uri:
 
         # Protect the service from accessing arbitrary remote URIs.
-        uri_parsed = parse_url(options.uri.encode('utf-8'))
-        remote_host = uri_parsed.host.decode()
+        uri_parsed = urlparse(options.uri.encode('utf-8'))
+        remote_host = uri_parsed.hostname.decode()
         if '*' not in settings.allowed_hosts and remote_host not in settings.allowed_hosts:
             raise HTTPException(status_code=HTTP_403_FORBIDDEN)
 
