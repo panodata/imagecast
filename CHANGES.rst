@@ -9,6 +9,7 @@ in progress
 - Get rid of the "httptools" dependency
 - Store the image format for later reuse directly after reading the original image
 - Run black and isort on the code base
+- Improve dependencies
 
 
 2020-06-08 0.3.0
