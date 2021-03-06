@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) 2020 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
-import os
-import sys
 import json
 import logging
+import os
+import sys
 
-from docopt import docopt, DocoptExit
+from docopt import DocoptExit, docopt
 
 from imagecast import __appname__, __version__
 from imagecast.core import process
@@ -46,30 +46,31 @@ def run():
 
     """
 
-    name = f'{__appname__} {__version__}'
+    name = f"{__appname__} {__version__}"
 
     # Parse command line arguments
     options = normalize_options(docopt(run.__doc__, version=name))
 
     # Setup logging
-    debug = options.get('debug')
+    debug = options.get("debug")
     log_level = logging.INFO
     if debug:
         log_level = logging.DEBUG
     setup_logging(log_level)
 
     # Debugging
-    log.debug('Options: {}'.format(json.dumps(options, indent=4)))
+    log.debug("Options: {}".format(json.dumps(options, indent=4)))
 
     # Run service.
     if options.service:
 
-        os.environ['ALLOWED_HOSTS'] = json.dumps(options.allowed_hosts.split(','))
+        os.environ["ALLOWED_HOSTS"] = json.dumps(options.allowed_hosts.split(","))
 
         listen_address = options.listen
-        log.info(f'Starting {name}')
-        log.info(f'Starting web service on {listen_address}')
+        log.info(f"Starting {name}")
+        log.info(f"Starting web service on {listen_address}")
         from imagecast.api import start_service
+
         start_service(listen_address, options.reload)
         return
 
@@ -90,7 +91,7 @@ def run():
     elif options.save:
         ie.image.save(options.save, dpi=(dpi, dpi))
     elif options.format:
-        if options.format == 'bytes':
+        if options.format == "bytes":
             buffer = ie.to_bytes()
         else:
             buffer = ie.to_buffer(options.format, dpi)

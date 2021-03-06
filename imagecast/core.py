@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) 2020 Andreas Motl <andreas@hiveeyes.org>
+# (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import io
+
 from PIL import Image
 from requests_cache import CachedSession
 
@@ -29,24 +30,24 @@ class ImageEngine:
 
     def monochrome(self, threshold):
 
-        #self.image = self.image.convert('1')
-        #self.image = self.image.convert('1', dither=False)
+        # self.image = self.image.convert('1')
+        # self.image = self.image.convert('1', dither=False)
 
         fn = lambda x: 255 if x > threshold else 0
-        self.image = self.image.convert('L').point(fn, mode='1')
+        self.image = self.image.convert("L").point(fn, mode="1")
 
     def grayscale(self):
-        self.image = self.image.convert('L')
+        self.image = self.image.convert("L")
 
     def resize_width(self, width):
         size = self.image.size
-        wpercent = (width / float(size[0]))
+        wpercent = width / float(size[0])
         height = int((float(size[1]) * float(wpercent)))
         self.image = self.image.resize((width, height), resample=Image.ANTIALIAS)
 
     def resize_height(self, height):
         size = self.image.size
-        hpercent = (height / float(size[1]))
+        hpercent = height / float(size[1])
         width = int((float(size[0]) * float(hpercent)))
         self.image = self.image.resize((width, height), resample=Image.ANTIALIAS)
 
@@ -85,7 +86,7 @@ def process(options):
 
     # (left, top, right, bottom)
     if options.crop:
-        cropbox = map(int, options.crop.split(','))
+        cropbox = map(int, options.crop.split(","))
         ie.crop(cropbox)
 
     if options.width:

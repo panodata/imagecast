@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# (c) 2020 Andreas Motl <andreas@terkin.org>
+# (c) 2020-2021 Andreas Motl <andreas@terkin.org>
 # License: GNU Affero General Public License, Version 3
 import logging
-from typing import List
 from dataclasses import dataclass
+from typing import List
 from urllib.parse import urlparse
 
+from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse, PlainTextResponse, Response
 from PIL import Image
-from fastapi import FastAPI, Query, Depends, HTTPException
-from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 from pydantic import BaseSettings
 from starlette.status import HTTP_403_FORBIDDEN
 
@@ -44,15 +44,18 @@ class QueryOptions:
 
 @app.get("/")
 def index(options: QueryOptions = Depends(QueryOptions)):
-    appname = f'{__appname__} {__version__}'
-    about = 'Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API.'
+    appname = f"{__appname__} {__version__}"
+    about = "Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API."
 
     if options.uri:
 
         # Protect the service from accessing arbitrary remote URIs.
-        uri_parsed = urlparse(options.uri.encode('utf-8'))
+        uri_parsed = urlparse(options.uri.encode("utf-8"))
         remote_host = uri_parsed.hostname.decode()
-        if '*' not in settings.allowed_hosts and remote_host not in settings.allowed_hosts:
+        if (
+            "*" not in settings.allowed_hosts
+            and remote_host not in settings.allowed_hosts
+        ):
             raise HTTPException(status_code=HTTP_403_FORBIDDEN)
 
         # Mogrify image.
@@ -60,7 +63,7 @@ def index(options: QueryOptions = Depends(QueryOptions)):
 
         # Determine output format.
         options.format = options.format or ie.format
-        if options.format == 'bytes':
+        if options.format == "bytes":
             buffer = ie.to_bytes()
         else:
             buffer = ie.to_buffer(options.format, options.dpi)
@@ -68,12 +71,13 @@ def index(options: QueryOptions = Depends(QueryOptions)):
         # Determine content type.
         mime_type = Image.MIME.get(options.format.upper())
         if mime_type is None:
-            mime_type = 'application/octet-stream'
+            mime_type = "application/octet-stream"
 
         return Response(buffer, media_type=mime_type)
 
     else:
-        return HTMLResponse(f"""
+        return HTMLResponse(
+            f"""
         <html>
             <head>
                 <title>{appname}</title>
@@ -87,7 +91,8 @@ def index(options: QueryOptions = Depends(QueryOptions)):
                 </ul>
             </body>
         </html>
-        """)
+        """
+        )
 
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
@@ -99,7 +104,8 @@ Disallow: /
 
 
 def start_service(listen_address, reload: bool = False):
-    host, port = listen_address.split(':')
+    host, port = listen_address.split(":")
     port = int(port)
     from uvicorn.main import run
-    run(app='imagecast.api:app', host=host, port=port, reload=reload)
+
+    run(app="imagecast.api:app", host=host, port=port, reload=reload)
