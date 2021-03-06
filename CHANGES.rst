@@ -5,6 +5,7 @@ Imagecast changelog
 
 in progress
 ===========
+- Add explicit ``--reload`` option to ``imagecast service`` for development mode
 
 
 2020-06-08 0.3.0

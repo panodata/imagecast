@@ -21,7 +21,7 @@ def run():
 
     Usage:
       imagecast --uri=<uri> [--monochrome=<threshold>] [--grayscale] [--width=<width>] [--height=<height>] [--crop=<cropbox>] [--display] [--format=<format>] [--dpi=<dpi>] [--save=<save>]
-      imagecast service [--listen=<listen>] [--allowed-hosts=<allowed-hosts>]
+      imagecast service [--listen=<listen>] [--allowed-hosts=<allowed-hosts>] [--reload]
       imagecast --version
       imagecast (-h | --help)
 
@@ -70,7 +70,7 @@ def run():
         log.info(f'Starting {name}')
         log.info(f'Starting web service on {listen_address}')
         from imagecast.api import start_service
-        start_service(listen_address)
+        start_service(listen_address, options.reload)
         return
 
     # Run command.

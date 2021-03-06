@@ -98,8 +98,8 @@ Disallow: /
     """.strip()
 
 
-def start_service(listen_address):
+def start_service(listen_address, reload: bool = False):
     host, port = listen_address.split(':')
     port = int(port)
     from uvicorn.main import run
-    run(app='imagecast.api:app', host=host, port=port, reload=True)
+    run(app='imagecast.api:app', host=host, port=port, reload=reload)
