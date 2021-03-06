@@ -11,6 +11,7 @@ in progress
 - Run black and isort on the code base
 - Improve dependencies
 - Improve documentation
+- Add software tests
 
 
 2020-06-08 0.3.0
