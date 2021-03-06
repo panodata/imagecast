@@ -13,6 +13,7 @@ class ImageEngine:
     def __init__(self, cache_ttl=300):
         self.data = None
         self.image = None
+        self.format = None
 
         # Setup HTTP client cache
         if ImageEngine.http is None:
@@ -24,6 +25,7 @@ class ImageEngine:
 
     def read(self):
         self.image = Image.open(io.BytesIO(self.data))
+        self.format = self.image.format
 
     def monochrome(self, threshold):
 

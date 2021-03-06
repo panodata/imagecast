@@ -59,7 +59,7 @@ def index(options: QueryOptions = Depends(QueryOptions)):
         ie = process(options)
 
         # Determine output format.
-        options.format = options.format or ie.image.format
+        options.format = options.format or ie.format
         if options.format == 'bytes':
             buffer = ie.to_bytes()
         else:
