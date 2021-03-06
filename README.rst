@@ -1,11 +1,20 @@
-.. image:: https://img.shields.io/badge/Python-3-green.svg
-    :target: https://github.com/panodata/imagecast
+.. image:: https://github.com/panodata/imagecast/workflows/Tests/badge.svg
+    :target: https://github.com/panodata/imagecast/actions?workflow=Tests
+
+.. image:: https://img.shields.io/pypi/pyversions/imagecast.svg
+    :target: https://python.org
 
 .. image:: https://img.shields.io/pypi/v/imagecast.svg
     :target: https://pypi.org/project/imagecast/
 
-.. image:: https://img.shields.io/github/tag/panodata/imagecast.svg
-    :target: https://github.com/panodata/imagecast
+.. image:: https://img.shields.io/pypi/status/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
+
+.. image:: https://img.shields.io/pypi/l/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
+
+.. image:: https://img.shields.io/pypi/dm/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
 
 |
 
@@ -19,11 +28,12 @@ Imagecast
 *****
 About
 *****
-Imagecast is like ImageMagick but for Pythonistas.
-Optionally provides its features via HTTP API.
 
-Currently, this is based on Pillow_. However, it
-might be based on Wand_ in the future.
+Imagecast is like ImageMagick but for Pythonistas. Optionally provides its
+features via HTTP API.
+
+Currently, this is based on Pillow_. However, it might be based on Wand_ in
+the future.
 
 There might still be dragons.
 
@@ -49,6 +59,7 @@ With service API::
 ********
 Features
 ********
+
 - Colorspace conversion: monochrome, grayscale
 - Cropping with negative right/bottom offsets
 - Resizing while keeping aspect ratio
@@ -59,6 +70,7 @@ Features
 ********
 Synopsis
 ********
+
 ::
 
     # Display on screen
@@ -78,6 +90,7 @@ Example::
 
 HTTP API
 ========
+
 Start the Imagecast service as daemon::
 
     imagecast service
@@ -99,6 +112,7 @@ Example::
 **************
 Other projects
 **************
+
 - https://github.com/DictGet/ecce-homo
 - https://github.com/agschwender/pilbox
 - https://github.com/francescortiz/image
