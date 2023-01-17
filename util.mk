@@ -56,11 +56,10 @@ pypi-upload: install-releasetools
 # ==============
 # Software tests
 # ==============
+# Invoke pytest.
 
 .PHONY: test
 pytest: setup-package
-
-	@# Run pytest.
-	$(pytest) test
+	$(pytest)
 
 test: pytest
