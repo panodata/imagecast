@@ -43,13 +43,13 @@ class ImageEngine:
         size = self.image.size
         wpercent = width / float(size[0])
         height = int((float(size[1]) * float(wpercent)))
-        self.image = self.image.resize((width, height), resample=Image.ANTIALIAS)
+        self.image = self.image.resize((width, height), resample=Image.LANCZOS)
 
     def resize_height(self, height):
         size = self.image.size
         hpercent = height / float(size[1])
         width = int((float(size[0]) * float(hpercent)))
-        self.image = self.image.resize((width, height), resample=Image.ANTIALIAS)
+        self.image = self.image.resize((width, height), resample=Image.LANCZOS)
 
     def crop(self, box):
         size = self.image.size
