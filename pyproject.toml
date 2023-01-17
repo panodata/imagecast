@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+minversion = "2.0"
+addopts = "-rsfEX -p pytester --strict-markers --verbosity=3"
+log_level = "DEBUG"
+testpaths = ["test"]
+xfail_strict = true
+markers = [
+]
