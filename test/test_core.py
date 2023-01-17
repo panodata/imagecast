@@ -1,3 +1,5 @@
+import sys
+
 import PIL
 import pytest
 
@@ -100,4 +102,7 @@ def test_to_bytes(ie: ImageEngine):
     ie.crop((50, 50, 100, 100))
     buffer = ie.to_bytes()
 
-    assert buffer.startswith(b"\x80F:\x85M@\x96^Q\xa2m_\xacwi\xb5\x80r\xbe\x89")
+    if sys.version_info < (3, 7):
+        assert buffer.startswith(b"\x80F:\x86L@\x96^Q\xa2m_\xacvj\xb4\x80")
+    else:
+        assert buffer.startswith(b"\x80F:\x85M@\x96^Q\xa2m_\xacwi\xb5\x80")
