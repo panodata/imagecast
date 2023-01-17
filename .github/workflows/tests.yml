@@ -1,9 +1,15 @@
 name: Tests
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+# Cancel in-progress jobs when pushing to the same branch.
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
 
   tests:
