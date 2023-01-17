@@ -5,6 +5,7 @@ Imagecast changelog
 
 in progress
 ===========
+- Update dependencies across the board
 
 
 2021-03-06 0.4.0

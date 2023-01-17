@@ -56,14 +56,14 @@ setup(name="imagecast",
       install_requires=[
           "docopt>=0.6,<1",
           "munch>=2.3,<3",
-          "Pillow>=8,<9",
+          "Pillow>=8,<10",
           "requests>=2.23,<3",
-          "requests-cache>=0.5,<0.6",
+          "requests-cache>=0.5,<1",
       ],
       extras_require={
           "service": [
-              "fastapi>=0.55.1,<0.64",
-              "uvicorn<=0.13.3",
+              "fastapi<0.90",
+              "uvicorn<0.21",
           ],
       },
       entry_points={
