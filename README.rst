@@ -1,5 +1,5 @@
-.. image:: https://github.com/panodata/imagecast/workflows/Tests/badge.svg
-    :target: https://github.com/panodata/imagecast/actions?workflow=Tests
+.. image:: https://github.com/panodata/imagecast/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/panodata/imagecast/actions/workflows/tests.yml
 
 .. image:: https://img.shields.io/pypi/pyversions/imagecast.svg
     :target: https://python.org
@@ -13,8 +13,8 @@
 .. image:: https://img.shields.io/pypi/l/imagecast.svg
     :target: https://pypi.org/project/imagecast/
 
-.. image:: https://img.shields.io/pypi/dm/imagecast.svg
-    :target: https://pypi.org/project/imagecast/
+.. image:: https://static.pepy.tech/badge/imagecast/month
+    :target: https://pepy.tech/project/imagecast
 
 |
 
