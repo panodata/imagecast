@@ -6,7 +6,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, "README.rst")).read()
 
 setup(name="imagecast",
-      version="0.4.0",
+      version="0.5.0",
       description="Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API.",
       long_description=README,
       license="AGPL 3, EUPL 1.2",
