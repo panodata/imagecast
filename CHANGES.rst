@@ -6,6 +6,7 @@ Imagecast changelog
 in progress
 ===========
 - Update dependencies across the board
+- Add support for Python 3.10 and 3.11
 
 
 2021-03-06 0.4.0
