@@ -60,7 +60,7 @@ setup(name="imagecast",
           "munch>=2.3,<3",
           "Pillow>=8,<10",
           "requests>=2.23,<3",
-          "requests-cache>=0.5,<1",
+          "requests-cache>=0.5,<2",
       ],
       extras_require={
           "service": [
