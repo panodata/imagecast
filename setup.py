@@ -65,7 +65,7 @@ setup(name="imagecast",
       extras_require={
           "service": [
               "fastapi<0.96",
-              "uvicorn<0.22",
+              "uvicorn<0.23",
           ],
       },
       entry_points={
