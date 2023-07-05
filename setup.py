@@ -58,7 +58,7 @@ setup(name="imagecast",
       install_requires=[
           "docopt>=0.6,<1",
           "munch>=2.3,<5",
-          "Pillow>=8,<10",
+          "Pillow>=8,<11",
           "requests>=2.23,<3",
           "requests-cache>=0.5,<2",
       ],
