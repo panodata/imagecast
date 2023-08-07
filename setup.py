@@ -64,7 +64,7 @@ setup(name="imagecast",
       ],
       extras_require={
           "service": [
-              "fastapi<0.101",
+              "fastapi<0.102",
               "uvicorn<0.24",
           ],
       },
