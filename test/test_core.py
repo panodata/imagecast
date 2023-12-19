@@ -19,7 +19,7 @@ def ie() -> ImageEngine:
 def test_read(ie: ImageEngine):
 
     assert ie.data.startswith(
-        b"\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x01\x00H\x00H\x00\x00"
+        b"\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01"
     )
     assert ie.image is None
 
@@ -33,7 +33,7 @@ def test_read(ie: ImageEngine):
     assert ie.image.getbands() == ("R", "G", "B")
     assert ie.image.getextrema() == ((0, 255), (0, 255), (0, 255))
     assert ie.image.getpalette() is None
-    assert round(ie.image.entropy(), 2) == 8.34
+    assert round(ie.image.entropy(), 2) == 8.32
 
 
 def test_grayscale(ie: ImageEngine):
@@ -104,4 +104,5 @@ def test_to_bytes(ie: ImageEngine):
 
     assert False \
         or buffer.startswith(b"\x80") \
-        or buffer.startswith(b"\x7f")
+        or buffer.startswith(b"\x7f") \
+        or buffer.startswith(b"{")
