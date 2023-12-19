@@ -2,7 +2,9 @@
 # (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import io
+import tempfile
 
+import requests
 from PIL import Image
 from requests_cache import CachedSession
 
@@ -12,6 +14,7 @@ class ImageEngine:
     http = None
 
     def __init__(self, cache_ttl=300):
+        self.response: requests.Response = None
         self.data = None
         self.image = None
         self.format = None
@@ -20,9 +23,29 @@ class ImageEngine:
         if ImageEngine.http is None:
             ImageEngine.http = CachedSession(backend="memory", expire_after=cache_ttl)
 
+    def acquire(self, uri: str, dom_selector: str = None):
+        self.download(uri)
+        if self.response.headers["Content-Type"].startswith("text/html"):
+            self.data = self.capture(uri, dom_selector)
+
+    def capture(self, uri: str, dom_selector: str = None) -> bytes:
+        from playwright.sync_api import sync_playwright
+        tmpfile = tempfile.NamedTemporaryFile(suffix=".png")
+        with sync_playwright() as p:
+            browser = p.firefox.launch()
+            page = browser.new_page()
+            page.goto(uri)
+            page.wait_for_load_state("networkidle")
+            element = page
+            if dom_selector:
+                element = page.locator(dom_selector)
+            element.screenshot(path=tmpfile.name)
+            browser.close()
+        return tmpfile.read()
+
     def download(self, uri):
-        response = self.http.get(uri)
-        self.data = response.content
+        self.response = self.http.get(uri)
+        self.data = self.response.content
 
     def read(self):
         self.image = Image.open(io.BytesIO(self.data))
@@ -75,7 +98,7 @@ class ImageEngine:
 
 def process(options):
     ie = ImageEngine(cache_ttl=options.cache_ttl)
-    ie.download(options.uri)
+    ie.acquire(options.uri, options.element)
     ie.read()
 
     if options.monochrome:

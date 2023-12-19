@@ -5,6 +5,7 @@ Imagecast changelog
 
 in progress
 ===========
+- Add capability to acquire images from HTML web pages, and elements thereof
 
 
 2023-01-17 0.5.0
