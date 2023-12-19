@@ -11,7 +11,7 @@ def ie() -> ImageEngine:
     ie = ImageEngine()
 
     # Acquire image.
-    ie.download("https://unsplash.com/photos/WvdKljW55rM/download?force=true")
+    ie.acquire("https://unsplash.com/photos/WvdKljW55rM/download?force=true")
 
     return ie
 
@@ -106,3 +106,31 @@ def test_to_bytes(ie: ImageEngine):
         or buffer.startswith(b"\x80") \
         or buffer.startswith(b"\x7f") \
         or buffer.startswith(b"{")
+
+
+def test_acquire_html_full():
+    """
+    Acquire image from HTML, using Playwright/Firefox.
+    """
+    ie = ImageEngine()
+
+    ie.acquire("https://example.org/")
+    ie.read()
+    buffer = ie.to_bytes()
+
+    # TODO: Why doesn't this employ a PNG header?
+    assert buffer.startswith(b"\xf0\xf0\xf2\xff\xf0\xf0\xf2")
+
+
+def test_acquire_html_partial():
+    """
+    Acquire image from HTML, with DOM selector.
+    """
+    ie = ImageEngine()
+
+    ie.acquire("https://example.org/", dom_selector="h1")
+    ie.read()
+    buffer = ie.to_bytes()
+
+    # TODO: Why doesn't this employ a PNG header?
+    assert buffer.startswith(b"\xfd\xfd\xff\xff\xfd")

@@ -45,6 +45,7 @@ jobs:
         run: |
           pip install --requirement=requirements-test.txt
           pip install --editable=.[service]
+          playwright install firefox
 
       - name: Run tests
         run: pytest

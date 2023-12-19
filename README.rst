@@ -88,6 +88,27 @@ Example::
     imagecast --uri="https://unsplash.com/photos/WvdKljW55rM/download?force=true" --monochrome=80 --crop=850,1925,-950,-900 --width=640 --display
 
 
+HTML Capturing
+==============
+
+Imagecast can also capture screenshots of webpages, or elements thereof. It uses
+`Playwright`_ and `Firefox`_ to convert full pages or specific DOM elements
+to bitmaps.
+
+After installing Imagecast, run::
+
+    playwright install firefox
+
+Then, invoke Imagecast like::
+
+    imagecast --uri="${URL}" --display
+
+In order to select specific elements for capturing, use the ``--element`` option
+to express a DOM selector to apply::
+
+    imagecast --uri="${URL}" --element="#panel-1" --display
+
+
 HTTP API
 ========
 
@@ -116,3 +137,7 @@ Other projects
 - https://github.com/DictGet/ecce-homo
 - https://github.com/agschwender/pilbox
 - https://github.com/francescortiz/image
+
+
+.. _Firefox: https://www.mozilla.org/firefox/
+.. _Playwright: https://playwright.dev/
