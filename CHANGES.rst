@@ -6,6 +6,7 @@ Imagecast changelog
 in progress
 ===========
 - Add capability to acquire images from HTML web pages, and elements thereof
+- Remove support for Python 3.6
 
 
 2023-01-17 0.5.0
