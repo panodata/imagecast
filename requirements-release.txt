@@ -1,4 +1,4 @@
 build<2
 bump2version<2
-keyring<25
+keyring<26
 twine<6
