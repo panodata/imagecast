@@ -32,15 +32,26 @@ class ImageEngine:
         from playwright.sync_api import sync_playwright
         tmpfile = tempfile.NamedTemporaryFile(suffix=".png")
         with sync_playwright() as p:
-            browser = p.firefox.launch()
+            browser = p.firefox.launch(
+                headless=False,
+                firefox_user_prefs={
+                    "network.cookie.cookieBehavior": 4,
+                    "security.insecure_field_warning.contextual.enabled": False,
+                    "security.certerrors.permanentOverride": False,
+                    "network.stricttransportsecurity.preloadlist": False,
+                    "security.enterprise_roots.enabled": True,
+                    "security.mixed_content.block_active_content": False,
+                })
             page = browser.new_page()
             page.goto(uri)
+            #page.wait_for_load_state("commit")
             page.wait_for_load_state("networkidle")
             element = page
             if dom_selector:
                 element = page.locator(dom_selector)
+                element.wait_for(timeout=300000)
             element.screenshot(path=tmpfile.name)
-            browser.close()
+            #browser.close()
         return tmpfile.read()
 
     def download(self, uri):
