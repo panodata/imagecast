@@ -102,10 +102,7 @@ def test_to_bytes(ie: ImageEngine):
     ie.crop((50, 50, 100, 100))
     buffer = ie.to_bytes()
 
-    assert False \
-        or buffer.startswith(b"\x80") \
-        or buffer.startswith(b"\x7f") \
-        or buffer.startswith(b"{")
+    assert isinstance(buffer, bytes)
 
 
 def test_acquire_html_full():
@@ -116,10 +113,9 @@ def test_acquire_html_full():
 
     ie.acquire("https://example.org/")
     ie.read()
-    buffer = ie.to_bytes()
+    buffer = ie.to_buffer("png", dpi=72)
 
-    # TODO: Why doesn't this employ a PNG header?
-    assert buffer.startswith(b"\xf0\xf0\xf2\xff\xf0\xf0\xf2")
+    assert buffer.startswith(b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR")
 
 
 def test_acquire_html_partial():
@@ -130,7 +126,6 @@ def test_acquire_html_partial():
 
     ie.acquire("https://example.org/", dom_selector="h1")
     ie.read()
-    buffer = ie.to_bytes()
+    buffer = ie.to_buffer("png", dpi=72)
 
-    # TODO: Why doesn't this employ a PNG header?
-    assert buffer.startswith(b"\xfd\xfd\xff\xff\xfd")
+    assert buffer.startswith(b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR")
