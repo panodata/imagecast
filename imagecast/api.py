@@ -3,7 +3,8 @@
 # License: GNU Affero General Public License, Version 3
 import logging
 from dataclasses import dataclass
-from typing import List
+from functools import lru_cache
+from typing import List, Annotated
 from urllib.parse import urlparse
 
 from fastapi import Depends, FastAPI, HTTPException, Query
@@ -21,7 +22,11 @@ class Settings(BaseSettings):
     allowed_hosts: List[str] = []
 
 
-settings = Settings()
+@lru_cache
+def get_settings():
+    return Settings()
+
+
 app = FastAPI()
 
 log = logging.getLogger(__name__)
@@ -32,6 +37,7 @@ log = logging.getLogger(__name__)
 @dataclass
 class QueryOptions:
     uri: str = Query(default=None)
+    element: str = Query(default=None)
     monochrome: int = Query(default=None)
     grayscale: bool = Query(default=False)
     crop: str = Query(default=None)
@@ -43,7 +49,7 @@ class QueryOptions:
 
 
 @app.get("/")
-def index(options: QueryOptions = Depends(QueryOptions)):
+def index(settings: Annotated[Settings, Depends(get_settings)], options: QueryOptions = Depends(QueryOptions)):
     appname = f"{__appname__} {__version__}"
     about = "Imagecast is like ImageMagick but for Pythonistas. Optionally provides its features via HTTP API."
 

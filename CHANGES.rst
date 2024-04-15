@@ -5,7 +5,7 @@ Imagecast changelog
 
 in progress
 ===========
-
+- Added software tests for HTTP API and CLI
 
 2023-12-20 0.6.0
 ================
