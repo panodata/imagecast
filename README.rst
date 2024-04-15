@@ -1,28 +1,37 @@
-.. image:: https://github.com/panodata/imagecast/actions/workflows/tests.yml/badge.svg
-    :target: https://github.com/panodata/imagecast/actions/workflows/tests.yml
-
-.. image:: https://img.shields.io/pypi/pyversions/imagecast.svg
-    :target: https://python.org
-
-.. image:: https://img.shields.io/pypi/v/imagecast.svg
-    :target: https://pypi.org/project/imagecast/
-
-.. image:: https://img.shields.io/pypi/status/imagecast.svg
-    :target: https://pypi.org/project/imagecast/
-
-.. image:: https://img.shields.io/pypi/l/imagecast.svg
-    :target: https://pypi.org/project/imagecast/
-
-.. image:: https://static.pepy.tech/badge/imagecast/month
-    :target: https://pepy.tech/project/imagecast
-
-|
-
-.. imagecast-readme:
-
 #########
 Imagecast
 #########
+
+|
+
+.. start-badges
+
+|ci-tests| |ci-coverage| |license| |pypi-downloads|
+|python-versions| |status| |pypi-version|
+
+.. |ci-tests| image:: https://github.com/panodata/imagecast/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/panodata/imagecast/actions/workflows/tests.yml
+
+.. |ci-coverage| image:: https://codecov.io/gh/panodata/imagecast/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/panodata/imagecast
+    :alt: Test suite code coverage
+
+.. |python-versions| image:: https://img.shields.io/pypi/pyversions/imagecast.svg
+    :target: https://python.org
+
+.. |pypi-version| image:: https://img.shields.io/pypi/v/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
+
+.. |status| image:: https://img.shields.io/pypi/status/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
+
+.. |license| image:: https://img.shields.io/pypi/l/imagecast.svg
+    :target: https://pypi.org/project/imagecast/
+
+.. |pypi-downloads| image:: https://static.pepy.tech/badge/imagecast/month
+    :target: https://pepy.tech/project/imagecast
+
+.. end-badges
 
 
 *****
