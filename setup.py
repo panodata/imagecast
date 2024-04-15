@@ -56,7 +56,7 @@ setup(name="imagecast",
       },
       zip_safe=False,
       install_requires=[
-          "docopt>=0.6,<1",
+          "docopt-ng>=0.6,<1",
           "munch>=2.3,<5",
           "Pillow>=8,<11",
           "playwright<1.44",
