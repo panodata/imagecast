@@ -138,6 +138,10 @@ Example::
 
         imagecast service --allowed-hosts=unsplash.com,media.example.org
 
+    By default, no host will be allowed. If you really need to enable access
+    to all upstream hosts, use ``--allowed-hosts=*``. All host names must be
+    listed explicitly, wildcard notations like ``*.iana.org`` are not permitted.
+
 
 **************
 Other projects
