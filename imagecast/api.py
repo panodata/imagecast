@@ -2,9 +2,10 @@
 # (c) 2020-2021 Andreas Motl <andreas@terkin.org>
 # License: GNU Affero General Public License, Version 3
 import logging
+import sys
 from dataclasses import dataclass
 from functools import lru_cache
-from typing import List, Annotated
+from typing import List
 from urllib.parse import urlparse
 
 from fastapi import Depends, FastAPI, HTTPException, Query
@@ -15,6 +16,12 @@ from starlette.status import HTTP_403_FORBIDDEN
 
 from imagecast import __appname__, __version__
 from imagecast.core import process
+
+
+if sys.version_info < (3, 9):
+    from typing_extensions import Annotated
+else:
+    from typing import Annotated
 
 
 # https://fastapi.tiangolo.com/advanced/settings/

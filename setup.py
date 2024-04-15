@@ -55,6 +55,7 @@ setup(name="imagecast",
       },
       zip_safe=False,
       install_requires=[
+          "typing-extensions<5; python_version<'3.9'",
           "docopt-ng>=0.6,<1",
           "munch>=2.3,<5",
           "Pillow>=8,<11",
