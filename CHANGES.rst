@@ -5,6 +5,9 @@ Imagecast changelog
 
 in progress
 ===========
+
+2024-04-15 0.7.0
+================
 - Added software tests for HTTP API and CLI
 - Fixed HTTP API by downgrading to pydantic 1.x
 - Removed support for Python 3.7
