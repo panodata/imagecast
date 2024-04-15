@@ -38,29 +38,19 @@ Imagecast
 About
 *****
 
-Imagecast is like ImageMagick but for Pythonistas. Optionally provides its
-features via HTTP API.
-
-Currently, this is based on Pillow_. However, it might be based on Wand_ in
-the future.
-
-There might still be dragons.
-
-.. _Pillow: https://pillow.readthedocs.io/
-.. _Wand: http://wand-py.org/
+Imagecast is like ImageMagick but for Pythonistas. It is based on Pillow_,
+and optionally provides its features via HTTP API.
 
 
 *******
 Install
 *******
 
-Prerequisites
-=============
-::
+CLI interface::
 
     pip install imagecast
 
-With service API::
+With HTTP API service::
 
     pip install imagecast[service]
 
@@ -73,7 +63,9 @@ Features
 - Cropping with negative right/bottom offsets
 - Resizing while keeping aspect ratio
 - Output format: Any image formats from Pillow or raw bytes
-- HTTP API
+- HTML DOM capturing using Playwright
+- HTTP API, effectively implementing an image
+  acquisition and conversion service
 
 
 ********
@@ -91,14 +83,19 @@ Synopsis
     # Colorspace reduction, cropping, resizing and format conversion
     imagecast --uri="$IMGURL" --grayscale --crop=40,50,-50,-40 --width=200 --save=test.png
 
+    # HTML DOM capturing
+    imagecast --uri="$HTMLURL" --element="#logo"
 
-Example::
+Examples::
 
+    # Image manipulation
     imagecast --uri="https://unsplash.com/photos/WvdKljW55rM/download?force=true" --monochrome=80 --crop=850,1925,-950,-900 --width=640 --display
 
+    # HTML DOM capturing
+    imagecast --uri="https://www.iana.org/help/example-domains" --element="#logo"
 
-HTML Capturing
-==============
+HTML DOM capturing
+==================
 
 Imagecast can also capture screenshots of webpages, or elements thereof. It uses
 `Playwright`_ and `Firefox`_ to convert full pages or specific DOM elements
@@ -121,13 +118,20 @@ to express a DOM selector to apply::
 HTTP API
 ========
 
+``imagecast`` also provides its features using an HTTP API.
+
 Start the Imagecast service as daemon::
 
     imagecast service
 
-Example::
+Examples::
 
-    http "localhost:9999/?uri=https%3A%2F%2Funsplash.com%2Fphotos%2FWvdKljW55rM%2Fdownload%3Fforce%3Dtrue&monochrome=80&crop=850,1925,-950,-900&width=640"
+    # Image manipulation
+    http "http://localhost:9999/?uri=https%3A%2F%2Funsplash.com%2Fphotos%2FWvdKljW55rM%2Fdownload%3Fforce%3Dtrue&monochrome=80&crop=850,1925,-950,-900&width=640"
+
+    # HTML DOM capturing
+    http "http://localhost:9999/?uri=https://www.iana.org/help/example-domains&element=%23logo"
+
 
 .. note::
 
@@ -143,9 +147,9 @@ Example::
     listed explicitly, wildcard notations like ``*.iana.org`` are not permitted.
 
 
-**************
-Other projects
-**************
+*********
+Prior Art
+*********
 
 - https://github.com/DictGet/ecce-homo
 - https://github.com/agschwender/pilbox
@@ -153,4 +157,5 @@ Other projects
 
 
 .. _Firefox: https://www.mozilla.org/firefox/
+.. _Pillow: https://pillow.readthedocs.io/
 .. _Playwright: https://playwright.dev/
