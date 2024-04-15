@@ -26,7 +26,7 @@ def test_api_index():
     assert re.match(r".*<title>imagecast [\d.]+</title>.*", response.text, re.DOTALL)
 
 
-def test_api_unsplash_converge():
+def test_api_unsplash_converge(caplog):
     """
     Verify image management works.
     """
@@ -37,11 +37,16 @@ def test_api_unsplash_converge():
         "width": "640",
     }
     response = client.get("/", params=query_params)
+
+    # Verify log output.
+    assert "Acquiring image from https://unsplash.com/photos/WvdKljW55rM/download?force=true" in caplog.messages
+
+    # Verify content output.
     assert response.status_code == 200
     assert response.content.startswith(b"\xff\xd8\xff\xe0\x00\x10JFIF")
 
 
-def test_api_html_acquire():
+def test_api_html_acquire(caplog):
     """
     Verify HTML DOM element acquisition works.
     """
@@ -50,5 +55,10 @@ def test_api_html_acquire():
         "element": "#logo",
     }
     response = client.get("/", params=query_params)
+
+    # Verify log output.
+    assert "Acquiring image from https://www.iana.org/help/example-domains" in caplog.messages
+
+    # Verify content output.
     assert response.status_code == 200
     assert response.content.startswith(b"\x89PNG\r\n\x1a")

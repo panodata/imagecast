@@ -36,7 +36,7 @@ def test_cli_unsplash_converge(tmp_path, caplog):
     imagecast.cli.run()
 
     # Verify log output.
-    assert "Starting new HTTPS connection (1): unsplash.com:443" in caplog.messages
+    assert "Acquiring image from https://unsplash.com/photos/WvdKljW55rM/download?force=true" in caplog.messages
 
     # Verify content output.
     payload = output_file.read_bytes()
@@ -52,7 +52,7 @@ def test_cli_html_acquire(tmp_path, caplog):
     imagecast.cli.run()
 
     # Verify log output.
-    assert "Starting new HTTPS connection (1): www.iana.org:443" in caplog.messages
+    assert "Acquiring image from https://www.iana.org/help/example-domains" in caplog.messages
 
     # Verify content output.
     payload = output_file.read_bytes()

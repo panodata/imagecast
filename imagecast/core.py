@@ -2,11 +2,15 @@
 # (c) 2020-2021 Andreas Motl <andreas@hiveeyes.org>
 # License: GNU Affero General Public License, Version 3
 import io
+import logging
 import tempfile
 
 import requests
 from PIL import Image
 from requests_cache import CachedSession
+
+
+logger = logging.getLogger(__name__)
 
 
 class ImageEngine:
@@ -98,6 +102,9 @@ class ImageEngine:
 
 def process(options):
     ie = ImageEngine(cache_ttl=options.cache_ttl)
+
+    logger.info(f"Acquiring image from {options.uri}")
+
     ie.acquire(options.uri, options.element)
     ie.read()
 
