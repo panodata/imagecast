@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, PlainTextResponse, Response
 from PIL import Image
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from starlette.status import HTTP_403_FORBIDDEN
 
 from imagecast import __appname__, __version__
