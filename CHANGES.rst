@@ -8,6 +8,7 @@ in progress
 - Added software tests for HTTP API and CLI
 - Fixed HTTP API by downgrading to pydantic 1.x
 - Removed support for Python 3.7
+- Upgrade to pydantic-settings
 
 2023-12-20 0.6.0
 ================
