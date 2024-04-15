@@ -20,7 +20,7 @@ def run():
     Imagecast modifies images, optionally serving them via HTTP API.
 
     Usage:
-      imagecast --uri=<uri> [--element=] [--monochrome=<threshold>] [--grayscale] [--width=<width>] [--height=<height>] [--crop=<cropbox>] [--display] [--format=<format>] [--dpi=<dpi>] [--save=<save>]
+      imagecast --uri=<uri> [--element=] [--monochrome=<threshold>] [--grayscale] [--width=<width>] [--height=<height>] [--crop=<cropbox>] [--display] [--format=<format>] [--dpi=<dpi>] [--save=<save>] [--debug]
       imagecast service [--listen=<listen>] [--allowed-hosts=<allowed-hosts>] [--reload]
       imagecast --version
       imagecast (-h | --help)
