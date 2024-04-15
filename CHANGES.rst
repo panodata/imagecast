@@ -6,6 +6,7 @@ Imagecast changelog
 in progress
 ===========
 - Added software tests for HTTP API and CLI
+- Fixed HTTP API by downgrading to pydantic 1.x
 
 2023-12-20 0.6.0
 ================
