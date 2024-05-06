@@ -65,7 +65,7 @@ setup(name="imagecast",
       ],
       extras_require={
           "service": [
-              "fastapi<0.111",
+              "fastapi<0.112",
               "pydantic-settings<3",
               "uvicorn<0.30",
           ],
