@@ -67,7 +67,7 @@ setup(name="imagecast",
           "service": [
               "fastapi<0.112",
               "pydantic-settings<3",
-              "uvicorn<0.31",
+              "uvicorn<0.33",
           ],
       },
       entry_points={
